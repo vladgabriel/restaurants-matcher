@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model googleRestaurants {
+  id                String              @id @default(uuid())
+  name              String
+  phone             String?
+  latitude          Float?
+  longitude         Float?
+  restaurantMatches restaurantMatches[]
+}
+
+model yelpRestaurants {
+  id                String              @id @default(uuid())
+  name              String
+  phone             String?
+  latitude          Float?
+  longitude         Float?
+  restaurantMatches restaurantMatches[]
+}
+
+model restaurantMatches {
+  googleRestaurantId String
+  yelpRestaurantId   String
+  certainty          Certainty
+
+  yelpRestaurant   yelpRestaurants   @relation(fields: [yelpRestaurantId], references: [id])
+  googleRestaurant googleRestaurants @relation(fields: [googleRestaurantId], references: [id])
+
+  @@unique([googleRestaurantId, yelpRestaurantId])
+}
+
+enum Certainty {
+  Highest
+  High
+  Medium
+}
