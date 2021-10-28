@@ -1,5 +1,6 @@
 require('dotenv').config({});
 const { PrismaClient } = require('@prisma/client');
+// uses https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient algorithm
 const stringSimilarity = require('string-similarity');
 
 const prisma = new PrismaClient();
