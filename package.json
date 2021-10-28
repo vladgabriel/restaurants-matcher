@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
+    "db:up": "docker run -d --name db -v restaurants-db:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_PASSWORD=restaurants -e POSTGRES_USER=restaurants -e POSTGRES_DB=restaurants postgres",
+    "seed": "npx prisma db seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.14",
+    "prisma": "^3.3.0"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  }
+}
